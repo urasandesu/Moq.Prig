@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moq.Prig", "Moq.Prig\Moq.Prig.csproj", "{1C761A41-1D53-432E-B9F2-A3F519A0F5C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Moq.Prig", "Test.Moq.Prig\Test.Moq.Prig.csproj", "{4D0A1DE1-7EC5-4745-B429-0ABD7E4E83FB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug(.NET 3.5)|Any CPU = Debug(.NET 3.5)|Any CPU
+		Debug(.NET 4)|Any CPU = Debug(.NET 4)|Any CPU
+		Release(.NET 3.5)|Any CPU = Release(.NET 3.5)|Any CPU
+		Release(.NET 4)|Any CPU = Release(.NET 4)|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1C761A41-1D53-432E-B9F2-A3F519A0F5C1}.Debug(.NET 3.5)|Any CPU.ActiveCfg = Debug(.NET 3.5)|Any CPU
+		{1C761A41-1D53-432E-B9F2-A3F519A0F5C1}.Debug(.NET 3.5)|Any CPU.Build.0 = Debug(.NET 3.5)|Any CPU
+		{1C761A41-1D53-432E-B9F2-A3F519A0F5C1}.Debug(.NET 4)|Any CPU.ActiveCfg = Debug(.NET 4)|Any CPU
+		{1C761A41-1D53-432E-B9F2-A3F519A0F5C1}.Debug(.NET 4)|Any CPU.Build.0 = Debug(.NET 4)|Any CPU
+		{1C761A41-1D53-432E-B9F2-A3F519A0F5C1}.Release(.NET 3.5)|Any CPU.ActiveCfg = Release(.NET 3.5)|Any CPU
+		{1C761A41-1D53-432E-B9F2-A3F519A0F5C1}.Release(.NET 3.5)|Any CPU.Build.0 = Release(.NET 3.5)|Any CPU
+		{1C761A41-1D53-432E-B9F2-A3F519A0F5C1}.Release(.NET 4)|Any CPU.ActiveCfg = Release(.NET 4)|Any CPU
+		{1C761A41-1D53-432E-B9F2-A3F519A0F5C1}.Release(.NET 4)|Any CPU.Build.0 = Release(.NET 4)|Any CPU
+		{4D0A1DE1-7EC5-4745-B429-0ABD7E4E83FB}.Debug(.NET 3.5)|Any CPU.ActiveCfg = Debug(.NET 3.5)|Any CPU
+		{4D0A1DE1-7EC5-4745-B429-0ABD7E4E83FB}.Debug(.NET 3.5)|Any CPU.Build.0 = Debug(.NET 3.5)|Any CPU
+		{4D0A1DE1-7EC5-4745-B429-0ABD7E4E83FB}.Debug(.NET 4)|Any CPU.ActiveCfg = Debug(.NET 4)|Any CPU
+		{4D0A1DE1-7EC5-4745-B429-0ABD7E4E83FB}.Debug(.NET 4)|Any CPU.Build.0 = Debug(.NET 4)|Any CPU
+		{4D0A1DE1-7EC5-4745-B429-0ABD7E4E83FB}.Release(.NET 3.5)|Any CPU.ActiveCfg = Release(.NET 3.5)|Any CPU
+		{4D0A1DE1-7EC5-4745-B429-0ABD7E4E83FB}.Release(.NET 3.5)|Any CPU.Build.0 = Release(.NET 3.5)|Any CPU
+		{4D0A1DE1-7EC5-4745-B429-0ABD7E4E83FB}.Release(.NET 4)|Any CPU.ActiveCfg = Release(.NET 4)|Any CPU
+		{4D0A1DE1-7EC5-4745-B429-0ABD7E4E83FB}.Release(.NET 4)|Any CPU.Build.0 = Release(.NET 4)|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

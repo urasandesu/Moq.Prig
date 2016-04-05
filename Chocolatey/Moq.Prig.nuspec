@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Moq.Prig</id>
+    <version>0.0.0</version>
+    <title>Moq supplemental library for Prig</title>
+    <authors>Akira Sugiura</authors>
+    <owners>Akira Sugiura</owners>
+    <licenseUrl>https://github.com/urasandesu/Moq.Prig/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/urasandesu/Moq.Prig</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <summary>
+      Moq supplemental library for Prig.
+    </summary>
+    <description>
+      This is a library that helps to write test using Moq and Prig.
+    </description>
+    <copyright>(c) 2016 Akira Sugiura. All rights reserved.</copyright>
+    <tags>tdd isolation mock mocks mocking fake fakes faking unittest unittesting</tags>
+    <releaseNotes>Version 0.0.0
+* Initial release.
+
+
+About more previous versions, please see https://github.com/urasandesu/Moq.Prig/releases .
+    </releaseNotes>
+    <dependencies>
+      <dependency id="nuget.commandline" version="2.8.3" />
+      <dependency id="Prig" version="2.2.0" />
+    </dependencies> 
+  </metadata>
+  <files>
+    <file src="tools\**\*.*" target="tools" />
+    <file src="..\Moq.Prig\bin\Release(.NET 3.5)\Moq.Prig.dll" target="lib\net35" />
+    <file src="..\Moq.Prig\bin\Release(.NET 4)\Moq.Prig.dll" target="lib\net40" />
+  </files>
+</package>
