@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Urasandesu.Moq.Prig</RootNamespace>
-    <AssemblyName>Moq.Prig</AssemblyName>
+    <AssemblyName>Urasandesu.Moq.Prig</AssemblyName>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug%28.NET 3.5%29|AnyCPU'">

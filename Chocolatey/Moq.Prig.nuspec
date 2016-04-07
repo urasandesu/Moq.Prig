@@ -30,7 +30,7 @@ About more previous versions, please see https://github.com/urasandesu/Moq.Prig/
   </metadata>
   <files>
     <file src="tools\**\*.*" target="tools" />
-    <file src="..\Moq.Prig\bin\Release(.NET 3.5)\Moq.Prig.dll" target="lib\net35" />
-    <file src="..\Moq.Prig\bin\Release(.NET 4)\Moq.Prig.dll" target="lib\net40" />
+    <file src="..\Moq.Prig\bin\Release(.NET 3.5)\Urasandesu.Moq.Prig.dll" target="lib\net35" />
+    <file src="..\Moq.Prig\bin\Release(.NET 4)\Urasandesu.Moq.Prig.dll" target="lib\net40" />
   </files>
 </package>
