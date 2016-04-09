@@ -28,27 +28,35 @@
 #
 
 
+$pkgName = [IO.Path]::GetFileName($env:chocolateyPackageFolder)
 $chocoToolsPath = [IO.Path]::Combine($env:chocolateyPackageFolder, 'tools')
 
 
 foreach ($hedge in (dir $env:chocolateyPackageFolder -r | ? { $_.Extension -eq '.hedge' })) {
     $src = $hedge.FullName
     $dst = $src -replace '\.hedge$', ''
-    "  Renaming '$src' to '$dst'..."
+    "Renaming '$src' to '$dst'..."
     Move-Item $src $dst -Force
 }
 
 
-$packageName = "Moq.Prig"
-"  Creating the nuget package '$packageName'..."
+"Creating the nuget package '$pkgName'..."
 $nugetPackageFolder = [IO.Path]::Combine($chocoToolsPath, 'NuGet')
-nuget pack ([IO.Path]::Combine($nugetPackageFolder, "Moq.Prig.nuspec")) -OutputDirectory $chocoToolsPath
+nuget pack ([IO.Path]::Combine($nugetPackageFolder, "$pkgName.nuspec")) -OutputDirectory $chocoToolsPath
 
 
-$name = "Moq.Prig Source"
+$name = "$pkgName Source"
 $source = $chocoToolsPath
-"  Registering the nuget source '$source' as '$name'..."
-if (0 -lt @(nuget sources list | ? { $_ -match 'Moq.Prig Source' }).Length) {
+"Registering the nuget source '$source' as '$name'..."
+$namePattern = '^{0}$' -f [regex]::Escape($name)
+$nameRecordPattern = '^\s+\d+\.\s+'
+$nameExtractPattern = '^\s+\d+\.\s+(?<name>.*)(( \[Enabled\])|( \[Disabled\]))$'
+$installedSources = 
+    @(nuget sources list | 
+        where { $_ -match $nameRecordPattern } | 
+        foreach { if ($_ -match $nameExtractPattern) { $Matches['name'] } } | 
+        where { $_ -match $namePattern })
+if (0 -lt $installedSources.Length) {
     nuget sources update -name $name -source "$source"
 } else {
     nuget sources add -name $name -source "$source"

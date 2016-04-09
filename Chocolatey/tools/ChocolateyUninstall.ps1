@@ -28,11 +28,20 @@
 #
 
 
+$pkgName = [IO.Path]::GetFileName($env:chocolateyPackageFolder)
 $chocoToolsPath = [IO.Path]::Combine($env:chocolateyPackageFolder, 'tools')
 
 
-$name = "Moq.Prig Source"
-"  Unregistering the nuget source '$name'..."
-if (0 -lt @(nuget sources list | ? { $_ -match 'Moq.Prig Source' }).Length) {
+$name = "$pkgName Source"
+"Unregistering the nuget source '$name'..."
+$namePattern = '^{0}$' -f [regex]::Escape($name)
+$nameRecordPattern = '^\s+\d+\.\s+'
+$nameExtractPattern = '^\s+\d+\.\s+(?<name>.*)(( \[Enabled\])|( \[Disabled\]))$'
+$installedSources = 
+    @(nuget sources list | 
+        where { $_ -match $nameRecordPattern } | 
+        foreach { if ($_ -match $nameExtractPattern) { $Matches['name'] } } | 
+        where { $_ -match $namePattern })
+if (0 -lt $installedSources.Length) {
     nuget sources remove -name $name
 }
