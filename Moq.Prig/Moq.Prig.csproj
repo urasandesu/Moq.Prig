@@ -108,8 +108,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mixins\Moq\MockMixin.cs" />
+    <Compile Include="ICustomizer.cs" />
     <Compile Include="Mixins\Urasandesu\Prig\Framework\TypedBehaviorPreparableMixin.cs" />
+    <Compile Include="ICustomizable.cs" />
+    <Compile Include="IVerifiable.cs" />
+    <Compile Include="MockProxy`1.cs" />
+    <Compile Include="MockProxy.cs" />
     <Compile Include="MockStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

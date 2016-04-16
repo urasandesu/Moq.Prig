@@ -1,5 +1,5 @@
 ﻿/* 
- * File: TypedBehaviorPreparableMixin.cs
+ * File: IVerifiable.cs
  * 
  * Author: Akira Sugiura (urasandesu@gmail.com)
  * 
@@ -28,18 +28,12 @@
  */
 
 
-using Moq;
-using Urasandesu.Prig.Framework;
 
-namespace Urasandesu.Moq.Prig.Mixins.Urasandesu.Prig.Framework
+namespace Urasandesu.Moq.Prig
 {
-    public static class TypedBehaviorPreparableMixin
+    public interface IVerifiable
     {
-        public static MockProxy<TDelegate> BodyBy<TDelegate>(this TypedBehaviorPreparable<TDelegate> target, MockStorage ms) where TDelegate : class
-        {
-            var m = ms.Create<TDelegate>();
-            target.Body = m.Object;
-            return m;
-        }
+        void Verify();
+        void VerifyAll();
     }
 }

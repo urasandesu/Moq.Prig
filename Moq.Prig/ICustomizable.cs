@@ -1,5 +1,5 @@
 ﻿/* 
- * File: MockMixin.cs
+ * File: ICustomizable.cs
  * 
  * Author: Akira Sugiura (urasandesu@gmail.com)
  * 
@@ -28,21 +28,13 @@
  */
 
 
-using Moq;
-using Moq.Language.Flow;
-using System;
-using System.Linq.Expressions;
 
-namespace Urasandesu.Moq.Prig.Mixins.Moq
+using System;
+
+namespace Urasandesu.Moq.Prig
 {
-    public static class MockMixin
+    public interface ICustomizable
     {
-        public static ISetup<T, TResult> Expect<T, TResult>(this Mock<T> mock, Expression<Func<T, TResult>> expression, Times times) where T : class
-        {
-            var result = mock.Setup(expression);
-            result.Callback(() => mock.Verify(expression, times));
-            result.Verifiable();
-            return result;
-        }
+        ICustomizable Customize(Action<ICustomizer> exp);
     }
 }

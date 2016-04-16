@@ -1,5 +1,5 @@
 ﻿/* 
- * File: TypedBehaviorPreparableMixin.cs
+ * File: ICustomizer.cs
  * 
  * Author: Akira Sugiura (urasandesu@gmail.com)
  * 
@@ -28,18 +28,14 @@
  */
 
 
-using Moq;
+
+using System;
 using Urasandesu.Prig.Framework;
 
-namespace Urasandesu.Moq.Prig.Mixins.Urasandesu.Prig.Framework
+namespace Urasandesu.Moq.Prig
 {
-    public static class TypedBehaviorPreparableMixin
+    public interface ICustomizer
     {
-        public static MockProxy<TDelegate> BodyBy<TDelegate>(this TypedBehaviorPreparable<TDelegate> target, MockStorage ms) where TDelegate : class
-        {
-            var m = ms.Create<TDelegate>();
-            target.Body = m.Object;
-            return m;
-        }
+        MockProxy<T> Do<T>(Func<TypedBehaviorPreparable<T>> func) where T : class;
     }
 }

@@ -32,37 +32,122 @@
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Linq.Expressions;
+using Urasandesu.Moq.Prig.Mixins.Urasandesu.Prig.Framework;
 using Urasandesu.Prig.Framework;
 
 namespace Urasandesu.Moq.Prig
 {
-    public class MockStorage : MockRepository
+    public class MockStorage : MockRepository, ICustomizable, ICustomizer
     {
-        Dictionary<Delegate, Mock> m_storage = new Dictionary<Delegate, Mock>();
+        Dictionary<Delegate, MockProxy> m_storage = new Dictionary<Delegate, MockProxy>();
+        Dictionary<Mock, MockProxy> m_mockToProxies = new Dictionary<Mock, MockProxy>();
 
         public MockStorage(MockBehavior defaultBehavior)
             : base(defaultBehavior)
         { }
 
-        public void Assign(Delegate dlgt, Mock m)
+        public new MockProxy<T> Create<T>() where T : class
         {
-            m_storage[dlgt] = m;
+            var mock = base.Create<T>();
+            return CreateProxy(mock);
         }
 
-        public void Assign<T>(Func<TypedBehaviorPreparable<T>> func, Mock<T> m) where T : class
+        public new MockProxy<T> Create<T>(MockBehavior behavior) where T : class
         {
-            Assign((Delegate)func, (Mock)m);
+            var mock = base.Create<T>(behavior);
+            return CreateProxy(mock);
         }
 
-        public MockStorage Customize(Action<MockStorage> exp)
+        public new MockProxy<T> Create<T>(params object[] args) where T : class
+        {
+            var mock = base.Create<T>(args);
+            return CreateProxy(mock);
+        }
+
+        public new MockProxy<T> Create<T>(MockBehavior behavior, params object[] args) where T : class
+        {
+            var mock = base.Create<T>(behavior, args);
+            return CreateProxy(mock);
+        }
+
+        protected virtual MockProxy<T> CreateProxy<T>(Mock<T> mock) where T : class
+        {
+            var proxy = new MockProxy<T>(mock);
+            m_mockToProxies[mock] = proxy;
+            return proxy;
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void Assign(Delegate dlgt, MockProxy proxy)
+        {
+            m_storage[dlgt] = proxy;
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void Assign<T>(Func<TypedBehaviorPreparable<T>> func, MockProxy<T> proxy) where T : class
+        {
+            Assign((Delegate)func, (MockProxy)proxy);
+        }
+
+        public ICustomizable Customize(Action<ICustomizer> exp)
         {
             exp(this);
             return this;
         }
 
-        public Mock<T> Do<T>(Func<TypedBehaviorPreparable<T>> func) where T : class
+        MockProxy<T> ICustomizer.Do<T>(Func<TypedBehaviorPreparable<T>> func)
         {
-            return (Mock<T>)m_storage[func];
+            var preparable = func();
+            var proxy = preparable.BodyBy(this);
+            Assign(func, proxy);
+            return proxy;
+        }
+
+        public override void Verify()
+        {
+            VerifyMocks(mock =>
+            {
+                var proxy = default(MockProxy);
+                if (m_mockToProxies.TryGetValue(mock, out proxy))
+                    proxy.Verify();
+                else
+                    mock.Verify();
+            });
+        }
+
+        public override void VerifyAll()
+        {
+            VerifyMocks(mock =>
+            {
+                var proxy = default(MockProxy);
+                if (m_mockToProxies.TryGetValue(mock, out proxy))
+                    proxy.VerifyAll();
+                else
+                    mock.VerifyAll();
+            });
+        }
+
+        public new IQueryable<T> Of<T>() where T : class
+        {
+            throw new NotSupportedException();
+        }
+
+        public new IQueryable<T> Of<T>(Expression<Func<T, bool>> specification) where T : class
+        {
+            throw new NotSupportedException();
+        }
+
+        public new T OneOf<T>() where T : class
+        {
+            throw new NotSupportedException();
+        }
+
+        public new T OneOf<T>(Expression<Func<T, bool>> specification) where T : class
+        {
+            throw new NotSupportedException();
         }
     }
 }
